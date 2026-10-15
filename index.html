@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080808" />
+  <title>SAQR | صقر — Gaming Streamer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- شاشة البداية: اضغط دخول لتشغيل الموسيقى (المتصفح لا يسمح بالتشغيل التلقائي غالبًا) -->
+  <div class="intro" id="intro">
+    <div class="intro-card">
+      <div class="intro-mark">S<span>X</span></div>
+      <p class="eyebrow">WELCOME TO THE ZONE</p>
+      <h1>SAQR <span>صقر</span></h1>
+      <p class="intro-copy">جاهز تدخل عالم صقر؟</p>
+      <button class="enter-btn" id="enterBtn">دخول الموقع <span>↗</span></button>
+      <button class="quiet-btn" id="quietBtn">دخول بدون موسيقى</button>
+    </div>
+  </div>
+
+  <main>
+    <section class="hero">
+      <div class="hero-shade"></div>
+      <div class="topline"><span class="live-dot"></span> GAMING STREAMER <span class="topline-line"></span> SAQR X11</div>
+      <div class="hero-content">
+        <div class="logo-frame"><img src="logo.png" alt="SAQR Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="logo-fallback">ضع اللوجو هنا<br><small>logo.png</small></span></div>
+        <p class="hero-kicker">PLAY HARD • STAY SHARP</p>
+        <h1 class="saqr-title">SAQR</h1>
+        <div class="arabic-name">صـقـر</div>
+        <p class="hero-sub">GAMING • STREAMS • COMMUNITY</p>
+        <a class="scroll-cue" href="#music">اكتشف الموقع <span>↓</span></a>
+      </div>
+      <div class="hero-side-note">LEVEL UP<br>YOUR GAME</div>
+    </section>
+
+    <section class="music-section section-wrap" id="music">
+      <div class="section-heading"><span class="section-no">01</span><div><p class="eyebrow">YOUR SOUNDTRACK</p><h2>الميوزيك <em>زون</em></h2></div></div>
+      <div class="player">
+        <div class="player-label"><span class="music-icon">♫</span><div><strong>SAQR MUSIC</strong><small>اختر التراك اللي على مزاجك</small></div></div>
+        <div class="track-list">
+          <button class="track active" data-track="0"><span class="track-num">01</span><span class="track-info"><b>Track One</b><small>music1.mp3</small></span><span class="track-play">▶</span></button>
+          <button class="track" data-track="1"><span class="track-num">02</span><span class="track-info"><b>Track Two</b><small>music2.mp3</small></span><span class="track-play">▶</span></button>
+        </div>
+        <div class="player-controls">
+          <button class="control-btn" id="prevBtn" aria-label="السابق">⏮</button>
+          <button class="control-btn main-control" id="playBtn" aria-label="تشغيل أو إيقاف">▶</button>
+          <button class="control-btn" id="nextBtn" aria-label="التالي">⏭</button>
+          <div class="volume-wrap"><span>VOL</span><input id="volume" type="range" min="0" max="1" step="0.05" value="0.65" aria-label="مستوى الصوت"></div>
+        </div>
+        <audio id="audioPlayer" preload="none"></audio>
+      </div>
+    </section>
+
+    <section class="social-section section-wrap" id="social">
+      <div class="section-heading"><span class="section-no">02</span><div><p class="eyebrow">FOLLOW THE SIGNAL</p><h2>تابع صقر <em>على منصاتك</em></h2></div></div>
+      <div class="social-grid">
+        <a class="social-card tiktok" href="https://www.tiktok.com/@_mohamed_72?_r=1&_t=ZS-9AaGUHMi4iS" target="_blank" rel="noopener"><span class="platform-icon">♪</span><span class="platform-name">TIKTOK</span><span class="platform-handle">@_mohamed_72</span><span class="card-arrow">↗</span></a>
+        <a class="social-card kick" href="https://kick.com/saqrx11" target="_blank" rel="noopener"><span class="platform-icon kick-icon">K</span><span class="platform-name">KICK</span><span class="platform-handle">SAQRX11</span><span class="card-arrow">↗</span></a>
+        <a class="social-card youtube" href="https://youtube.com/@saqrx11?si=HEd2KoSModOv8-L4" target="_blank" rel="noopener"><span class="platform-icon">▶</span><span class="platform-name">YOUTUBE</span><span class="platform-handle">@saqrx11</span><span class="card-arrow">↗</span></a>
+        <a class="social-card discord" href="https://discord.gg/r7XgRWnNp" target="_blank" rel="noopener"><span class="platform-icon discord-icon">◉</span><span class="platform-name">DISCORD</span><span class="platform-handle">انضم للمجتمع</span><span class="card-arrow">↗</span></a>
+      </div>
+    </section>
+
+    <section class="gallery-section section-wrap" id="gallery">
+      <div class="section-heading"><span class="section-no">03</span><div><p class="eyebrow">MOMENTS & HIGHLIGHTS</p><h2>لقطات من <em>عالم صقر</em></h2></div></div>
+      <div class="gallery-grid">
+        <figure class="gallery-item g1"><img src="photo1.jpg" alt="SAQR highlight 1" loading="lazy"><figcaption>HIGHLIGHT 01</figcaption></figure>
+        <figure class="gallery-item g2"><img src="photo2.jpg" alt="SAQR highlight 2" loading="lazy"><figcaption>HIGHLIGHT 02</figcaption></figure>
+        <figure class="gallery-item g3"><img src="photo3.jpg" alt="SAQR highlight 3" loading="lazy"><figcaption>HIGHLIGHT 03</figcaption></figure>
+        <figure class="gallery-item g4"><img src="photo4.jpg" alt="SAQR highlight 4" loading="lazy"><figcaption>HIGHLIGHT 04</figcaption></figure>
+        <figure class="gallery-item g5"><img src="photo5.jpg" alt="SAQR highlight 5" loading="lazy"><figcaption>HIGHLIGHT 05</figcaption></figure>
+      </div>
+    </section>
+    <footer><div class="footer-logo">SAQR<span> X11</span></div><p>PLAY HARD. STAY SHARP.</p><a href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">BACK TO TOP ↑</a></footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
