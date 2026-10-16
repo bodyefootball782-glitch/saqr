@@ -80,7 +80,7 @@ function renderStaff(role) {
   const members = STAFF_MEMBERS.filter(member => member.role.toUpperCase() === role);
   const grid = document.getElementById("staffGrid");
   if (!members.length) {
-    grid.innerHTML = '<div class="staff-empty">لسه مفيش أعضاء مضافين للرتبة دي.<br>ضيف بياناتهم في STAFF_MEMBERS داخل script.js</div>';
+    grid.innerHTML = '<div class="staff-empty">لسه مفيش أعضاء مضافين للرتبة دي</div>';
     return;
   }
   grid.innerHTML = members.map(member => `
