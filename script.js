@@ -5,7 +5,7 @@
    to visitors. Use it only for a private/test server or move it behind
    a small server endpoint before publishing publicly.
 ================================================================== */
-const APPLICATION_WEBHOOK_URL = "https://discord.com/api/webhooks/1560466503814348836/i-a1m3hlScq5bxLO3QQDwktbqtHGZdRMWBoV7ADC8C8niTvF1hxXZutxpFAkj6NIsIcY";
+const APPLICATION_WEBHOOK_URL = "https://discord.com/api/webhooks/1560673400932929678/FaasMpL6iLh5mfnPqfQj1yzTQgifP61MicSWofAwKUEuD72GnuKiHpMyH5tcB2PjKsGF";
 
 // Add your team members manually. Image paths can be logo.png or any image in this folder.
 const STAFF_MEMBERS = [
