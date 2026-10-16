@@ -9,7 +9,7 @@ const APPLICATION_WEBHOOK_URL = "https://discord.com/api/webhooks/15604665038143
 
 // Add your team members manually. Image paths can be logo.png or any image in this folder.
 const STAFF_MEMBERS = [
-{ role: "OWNERS", name: "Saqr", saqrx11: "@saqrx11", image: "logo.png" },
+{ role: "OWNERS", name: "Saqr", saqrx11: "@saqrx11", image: "logo1.png" },
  { role: "SERVER MANAGER", name: "its3ABDO", its3abdo_1: "@its3abdo_1", image: "staff1.png" },
   // Available roles: OWNERS, SERVER MANAGER, HIGH MANAGEMENT, ADMIN, EDITOR, MOD
 ];
