@@ -10,20 +10,72 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- شاشة البداية: اضغط دخول لتشغيل الموسيقى (المتصفح لا يسمح بالتشغيل التلقائي غالبًا) -->
-  <div class="intro" id="intro">
-    <div class="intro-card">
+  <!-- استقبال واختيارات الموقع -->
+  <div class="portal" id="portal">
+    <div class="portal-card">
       <div class="intro-mark">S<span>X</span></div>
       <p class="eyebrow">WELCOME TO THE ZONE</p>
       <h1>SAQR <span>صقر</span></h1>
-      <p class="intro-copy">جاهز تدخل عالم صقر؟</p>
-      <button class="enter-btn" id="enterBtn">دخول الموقع <span>↗</span></button>
-      <button class="quiet-btn" id="quietBtn">دخول بدون موسيقى</button>
+      <p class="intro-copy">اختار وجهتك داخل عالم صقر</p>
+      <div class="portal-menu">
+        <button class="portal-choice primary-choice" id="enterSaqr"><span class="choice-index">01</span><span><b>ENTER SAQR WEBSITE</b><small>الدخول إلى ويب صقر</small></span><span class="choice-arrow">↗</span></button>
+        <button class="portal-choice" data-application="Management"><span class="choice-index">02</span><span><b>MANAGEMENT APPLICATION</b><small>تقديمات الإدارة</small></span><span class="choice-arrow">↗</span></button>
+        <button class="portal-choice" data-application="Editor"><span class="choice-index">03</span><span><b>EDITOR APPLICATION</b><small>تقديمات الإيديتور</small></span><span class="choice-arrow">↗</span></button>
+        <button class="portal-choice" data-application="Admin"><span class="choice-index">04</span><span><b>ADMIN APPLICATION</b><small>تقديمات الأدمن</small></span><span class="choice-arrow">↗</span></button>
+        <button class="portal-choice" data-application="Mod"><span class="choice-index">05</span><span><b>MODERATOR APPLICATION</b><small>تقديمات المود</small></span><span class="choice-arrow">↗</span></button>
+        <button class="portal-choice staff-choice" id="openStaff"><span class="choice-index">06</span><span><b>VIEW STAFF</b><small>تعرف على فريق صقر</small></span><span class="choice-arrow">↗</span></button>
+      </div>
+      <div class="views-counter"><span class="views-eye">◉</span><span><b id="viewCount">—</b><small>LOCAL VISITS ON THIS DEVICE</small></span></div>
+      <p class="portal-note">عداد الزيارات الحالي على نفس الجهاز فقط.</p>
     </div>
   </div>
 
-  <main>
-    <section class="hero">
+  <!-- نافذة التقديم -->
+  <section class="application-screen" id="applicationScreen" aria-hidden="true">
+    <div class="application-card">
+      <button class="back-button" id="backFromApplication">← رجوع</button>
+      <p class="eyebrow">SAQR TEAM • APPLICATION FORM</p>
+      <h2 id="applicationTitle">MANAGEMENT <em>APPLICATION</em></h2>
+      <p class="application-intro">جاوب على الأسئلة دي بوضوح، وبعد الإرسال هيوصل التقديم لروم Applications على ديسكورد.</p>
+      <form id="applicationForm">
+        <label>اسمك الثلاثي؟<input name="fullName" required maxlength="100" placeholder="اكتب اسمك الثلاثي"></label>
+        <label>سنك؟<input name="age" required type="number" min="10" max="99" placeholder="اكتب سنك"></label>
+        <label>هل لديك خبرة في المجال؟<select name="experience" required><option value="" selected disabled>اختار إجابتك</option><option>نعم</option><option>لا</option></select></label>
+        <label class="examples-question">هل سبق لك العمل مع أحد؟ <span>مع ذكر أمثلة</span><textarea name="examples" required maxlength="1200" rows="4" placeholder="اكتب أمثلة أو اكتب لا يوجد"></textarea></label>
+        <label>هل تعرف التعليمات الإدارية؟<select name="rules" required><option value="" selected disabled>اختار إجابتك</option><option>نعم</option><option>لا</option></select></label>
+        <label>هل سبق لك وقمت بالدخول إلى الويب هنا؟<select name="visited" required><option value="" selected disabled>اختار إجابتك</option><option>نعم</option><option>لا</option></select></label>
+        <label>تقييمك للويب؟ كم من 10<input name="rating" required type="number" min="1" max="10" placeholder="من 1 إلى 10"></label>
+        <label>اسم اليوزر بتاعك على ديسكورد<input name="discord" required maxlength="100" placeholder="Discord username"></label>
+        <label>اسم اليوزر بتاعك على تيك توك<input name="tiktok" required maxlength="100" placeholder="TikTok username"></label>
+        <button class="submit-application" type="submit">إرسال التقديم <span>↗</span></button>
+        <p class="form-status" id="formStatus" role="status"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- عرض التيم يدويًا -->
+  <section class="staff-screen" id="staffScreen" aria-hidden="true">
+    <div class="staff-container">
+      <button class="back-button" id="backFromStaff">← رجوع</button>
+      <p class="eyebrow">SAQR • THE TEAM</p>
+      <h2>VIEW <em>STAFF</em></h2>
+      <p class="staff-intro">اختار الرتبة عشان تشوف أعضاء الفريق.</p>
+      <div class="staff-roles" id="staffRoles">
+        <button class="staff-role active" data-role="OWNERS">OWNERS</button>
+        <button class="staff-role" data-role="SERVER MANAGER">SERVER MANAGER</button>
+        <button class="staff-role" data-role="HIGH MANAGEMENT">HIGH MANAGEMENT</button>
+        <button class="staff-role" data-role="ADMIN">ADMIN</button>
+        <button class="staff-role" data-role="EDITOR">EDITOR</button>
+        <button class="staff-role" data-role="MOD">MOD</button>
+      </div>
+      <h3 class="selected-role" id="selectedRole">OWNERS</h3>
+      <div class="staff-grid" id="staffGrid"></div>
+      <p class="staff-hint">تقدر تضيف أعضاء الفريق وتغيّر بياناتهم من ملف <code>script.js</code>.</p>
+    </div>
+  </section>
+
+  <main id="mainWebsite" class="site-hidden">
+    <section class="hero" id="top">
       <div class="hero-shade"></div>
       <div class="topline"><span class="live-dot"></span> GAMING STREAMER <span class="topline-line"></span> SAQR X11</div>
       <div class="hero-content">
@@ -45,12 +97,7 @@
           <button class="track active" data-track="0"><span class="track-num">01</span><span class="track-info"><b>Track One</b><small>music1.mp3</small></span><span class="track-play">▶</span></button>
           <button class="track" data-track="1"><span class="track-num">02</span><span class="track-info"><b>Track Two</b><small>music2.mp3</small></span><span class="track-play">▶</span></button>
         </div>
-        <div class="player-controls">
-          <button class="control-btn" id="prevBtn" aria-label="السابق">⏮</button>
-          <button class="control-btn main-control" id="playBtn" aria-label="تشغيل أو إيقاف">▶</button>
-          <button class="control-btn" id="nextBtn" aria-label="التالي">⏭</button>
-          <div class="volume-wrap"><span>VOL</span><input id="volume" type="range" min="0" max="1" step="0.05" value="0.65" aria-label="مستوى الصوت"></div>
-        </div>
+        <div class="player-controls"><button class="control-btn" id="prevBtn" aria-label="السابق">⏮</button><button class="control-btn main-control" id="playBtn" aria-label="تشغيل أو إيقاف">▶</button><button class="control-btn" id="nextBtn" aria-label="التالي">⏭</button><div class="volume-wrap"><span>VOL</span><input id="volume" type="range" min="0" max="1" step="0.05" value="0.65" aria-label="مستوى الصوت"></div></div>
         <audio id="audioPlayer" preload="none"></audio>
       </div>
     </section>
@@ -67,13 +114,7 @@
 
     <section class="gallery-section section-wrap" id="gallery">
       <div class="section-heading"><span class="section-no">03</span><div><p class="eyebrow">MOMENTS & HIGHLIGHTS</p><h2>لقطات من <em>عالم صقر</em></h2></div></div>
-      <div class="gallery-grid">
-        <figure class="gallery-item g1"><img src="photo1.jpg" alt="SAQR highlight 1" loading="lazy"><figcaption>HIGHLIGHT 01</figcaption></figure>
-        <figure class="gallery-item g2"><img src="photo2.jpg" alt="SAQR highlight 2" loading="lazy"><figcaption>HIGHLIGHT 02</figcaption></figure>
-        <figure class="gallery-item g3"><img src="photo3.jpg" alt="SAQR highlight 3" loading="lazy"><figcaption>HIGHLIGHT 03</figcaption></figure>
-        <figure class="gallery-item g4"><img src="photo4.jpg" alt="SAQR highlight 4" loading="lazy"><figcaption>HIGHLIGHT 04</figcaption></figure>
-        <figure class="gallery-item g5"><img src="photo5.jpg" alt="SAQR highlight 5" loading="lazy"><figcaption>HIGHLIGHT 05</figcaption></figure>
-      </div>
+      <div class="gallery-grid"><figure class="gallery-item g1"><img src="photo1.jpg" alt="SAQR highlight 1" loading="lazy"><figcaption>HIGHLIGHT 01</figcaption></figure><figure class="gallery-item g2"><img src="photo2.jpg" alt="SAQR highlight 2" loading="lazy"><figcaption>HIGHLIGHT 02</figcaption></figure><figure class="gallery-item g3"><img src="photo3.jpg" alt="SAQR highlight 3" loading="lazy"><figcaption>HIGHLIGHT 03</figcaption></figure><figure class="gallery-item g4"><img src="photo4.jpg" alt="SAQR highlight 4" loading="lazy"><figcaption>HIGHLIGHT 04</figcaption></figure><figure class="gallery-item g5"><img src="photo5.jpg" alt="SAQR highlight 5" loading="lazy"><figcaption>HIGHLIGHT 05</figcaption></figure></div>
     </section>
     <footer><div class="footer-logo">SAQR<span> X11</span></div><p>PLAY HARD. STAY SHARP.</p><a href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">BACK TO TOP ↑</a></footer>
   </main>
