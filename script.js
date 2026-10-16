@@ -5,12 +5,12 @@
    to visitors. Use it only for a private/test server or move it behind
    a small server endpoint before publishing publicly.
 ================================================================== */
-const APPLICATION_WEBHOOK_URL = "PASTE_DISCORD_WEBHOOK_URL_HERE";
+const APPLICATION_WEBHOOK_URL = "https://discord.com/api/webhooks/1560466503814348836/i-a1m3hlScq5bxLO3QQDwktbqtHGZdRMWBoV7ADC8C8niTvF1hxXZutxpFAkj6NIsIcY";
 
 // Add your team members manually. Image paths can be logo.png or any image in this folder.
 const STAFF_MEMBERS = [
-  // { role: "OWNERS", name: "Saqr", username: "@saqrx11", image: "logo.png" },
-  // { role: "SERVER MANAGER", name: "Member Name", username: "@discordusername", image: "staff1.png" },
+{ role: "OWNERS", name: "Saqr", saqrx11: "@saqrx11", image: "logo.png" },
+ { role: "SERVER MANAGER", name: "its3ABDO", its3abdo_1: "@its3abdo_1", image: "staff1.png" },
   // Available roles: OWNERS, SERVER MANAGER, HIGH MANAGEMENT, ADMIN, EDITOR, MOD
 ];
 
