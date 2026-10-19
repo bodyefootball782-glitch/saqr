@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  <style>.discord-gate{display:grid;gap:12px;margin:22px 0}.discord-gate .submit-application{text-align:center;text-decoration:none;cursor:pointer}.discord-gate button{font:inherit}.form-status{overflow-wrap:anywhere}form[hidden]{display:none!important}</style>
 </head>
 <body>
   <!-- استقبال واختيارات الموقع -->
@@ -19,10 +20,8 @@
       <p class="intro-copy">اختار وجهتك داخل عالم صقر</p>
       <div class="portal-menu">
         <button class="portal-choice primary-choice" id="enterSaqr"><span class="choice-index">01</span><span><b>ENTER SAQR WEBSITE</b><small>الدخول إلى ويب صقر</small></span><span class="choice-arrow">↗</span></button>
-        <button class="portal-choice" data-application="Management"><span class="choice-index">02</span><span><b>MANAGEMENT APPLICATION</b><small>تقديمات الإدارة</small></span><span class="choice-arrow">↗</span></button>
-        <button class="portal-choice" data-application="Editor"><span class="choice-index">03</span><span><b>EDITOR APPLICATION</b><small>تقديمات الإيديتور</small></span><span class="choice-arrow">↗</span></button>
-        <button class="portal-choice" data-application="Admin"><span class="choice-index">04</span><span><b>ADMIN APPLICATION</b><small>تقديمات الأدمن</small></span><span class="choice-arrow">↗</span></button>
-        <button class="portal-choice" data-application="Mod"><span class="choice-index">05</span><span><b>MODERATOR APPLICATION</b><small>تقديمات المود</small></span><span class="choice-arrow">↗</span></button>
+        <button class="portal-choice" data-application="ModAdmin"><span class="choice-index">02</span><span><b>MOD / ADMIN APPLICATION</b><small>تقديم مود أو أدمن</small></span><span class="choice-arrow">↗</span></button>
+        <button class="portal-choice" data-application="Editor"><span class="choice-index">03</span><span><b>EDITOR APPLICATION</b><small>تقديم إيديتور</small></span><span class="choice-arrow">↗</span></button>
         <button class="portal-choice staff-choice" id="openStaff"><span class="choice-index">06</span><span><b>VIEW STAFF</b><small>تعرف على فريق صقر</small></span><span class="choice-arrow">↗</span></button>
       </div>
       <div class="views-counter"><span class="views-eye">◉</span><span><b id="viewCount">—</b><small>LOCAL VISITS ON THIS DEVICE</small></span></div>
@@ -36,8 +35,13 @@
       <button class="back-button" id="backFromApplication">← رجوع</button>
       <p class="eyebrow">SAQR TEAM • APPLICATION FORM</p>
       <h2 id="applicationTitle">MANAGEMENT <em>APPLICATION</em></h2>
-      <p class="application-intro">جاوب على الأسئلة دي بوضوح، وبعد الإرسال هيوصل التقديم لروم Applications على ديسكورد.</p>
-      <form id="applicationForm">
+      <p class="application-intro">لازم تكون داخل سيرفر ديسكورد صقر قبل ما تعرض التقديمات.</p>
+      <div class="discord-gate" id="discordGate">
+        <a class="submit-application" href="https://discord.gg/r7XgRWnNp" target="_blank" rel="noopener">دخول سيرفر صقر على Discord ↗</a>
+        <button class="submit-application" id="viewApplications" type="button">دخلت السيرفر — عرض التقديمات</button>
+        <p class="form-status" id="authStatus" role="status">بعد الضغط هتسجل دخول بحساب Discord، والسيرفر هيتحقق من عضويتك.</p>
+      </div>
+      <form id="applicationForm" hidden>
         <label>اسمك الثلاثي؟<input name="fullName" required maxlength="100" placeholder="اكتب اسمك الثلاثي"></label>
         <label>سنك؟<input name="age" required type="number" min="10" max="99" placeholder="اكتب سنك"></label>
         <label>هل لديك خبرة في المجال؟<select name="experience" required><option value="" selected disabled>اختار إجابتك</option><option>نعم</option><option>لا</option></select></label>
@@ -70,7 +74,7 @@
       </div>
       <h3 class="selected-role" id="selectedRole">OWNERS</h3>
       <div class="staff-grid" id="staffGrid"></div>
-      <p class="staff-hint">منوررر</code>.</p>
+      
     </div>
   </section>
 
@@ -108,7 +112,7 @@
         <a class="social-card tiktok" href="https://www.tiktok.com/@_mohamed_72?_r=1&_t=ZS-9AaGUHMi4iS" target="_blank" rel="noopener"><span class="platform-icon">♪</span><span class="platform-name">TIKTOK</span><span class="platform-handle">@_mohamed_72</span><span class="card-arrow">↗</span></a>
         <a class="social-card kick" href="https://kick.com/saqrx11" target="_blank" rel="noopener"><span class="platform-icon kick-icon">K</span><span class="platform-name">KICK</span><span class="platform-handle">SAQRX11</span><span class="card-arrow">↗</span></a>
         <a class="social-card youtube" href="https://youtube.com/@saqrx11?si=HEd2KoSModOv8-L4" target="_blank" rel="noopener"><span class="platform-icon">▶</span><span class="platform-name">YOUTUBE</span><span class="platform-handle">@saqrx11</span><span class="card-arrow">↗</span></a>
-        <a class="social-card discord" href="https://discord.gg/852hgs7Su" target="_blank" rel="noopener"><span class="platform-icon discord-icon">◉</span><span class="platform-name">DISCORD</span><span class="platform-handle">انضم للمجتمع</span><span class="card-arrow">↗</span></a>
+        <a class="social-card discord" href="https://discord.gg/r7XgRWnNp" target="_blank" rel="noopener"><span class="platform-icon discord-icon">◉</span><span class="platform-name">DISCORD</span><span class="platform-handle">انضم للمجتمع</span><span class="card-arrow">↗</span></a>
       </div>
     </section>
 

@@ -1,16 +1,12 @@
-/* ===================== SAQR WEBSITE SETTINGS =====================
-   1) Paste your Discord Applications webhook URL below.
-   2) Add staff members to STAFF_MEMBERS using the examples.
-   Keep in mind: a webhook URL placed in browser JavaScript is visible
-   to visitors. Use it only for a private/test server or move it behind
-   a small server endpoint before publishing publicly.
-================================================================== */
-const APPLICATION_WEBHOOK_URL = "https://discord.com/api/webhooks/1560673400932929678/FaasMpL6iLh5mfnPqfQj1yzTQgifP61MicSWofAwKUEuD72GnuKiHpMyH5tcB2PjKsGF";
+/* SAQR WEBSITE CONFIG
+   Set this to the HTTPS base URL of the Python backend after it is deployed.
+   Do NOT put Discord bot tokens, OAuth client secrets, or webhook URLs in this file.
+*/
+const API_BASE_URL = "https://YOUR-SAQ R-BACKEND-URL.example".replace("YOUR-SAQ R-BACKEND-URL", "YOUR-SAQR-BACKEND-URL");
 
-// Add your team members manually. Image paths can be logo.png or any image in this folder.
 const STAFF_MEMBERS = [
-{ role: "OWNERS", name: "Saqr", saqrx11: "@saqrx11", image: "logo1.png" },
- { role: "SERVER MANAGER", name: "its3ABDO", its3abdo_1: "@its3abdo_1", image: "staff1.png" },
+  // { role: "OWNERS", name: "Saqr", username: "@saqrx11", image: "logo.png" },
+  // { role: "SERVER MANAGER", name: "Member Name", username: "@discordusername", image: "staff1.png" },
   // Available roles: OWNERS, SERVER MANAGER, HIGH MANAGEMENT, ADMIN, EDITOR, MOD
 ];
 
@@ -44,9 +40,11 @@ function showPortal() {
 }
 function showApplication(role) {
   selectedApplication = role;
-  applicationTitle.innerHTML = `${role.toUpperCase()} <em>APPLICATION</em>`;
+  applicationTitle.innerHTML = `${role === "ModAdmin" ? "MOD / ADMIN" : role.toUpperCase()} <em>APPLICATION</em>`;
   formStatus.textContent = "";
+  authStatus.textContent = "بعد الضغط على عرض التقديمات، سجّل دخولك بحساب Discord وسيتم التحقق من عضويتك.";
   applicationForm.reset();
+  applicationForm.hidden = !isDiscordVerified;
   portal.style.display = "none";
   staffScreen.classList.remove("active");
   applicationScreen.classList.add("active");
@@ -80,7 +78,7 @@ function renderStaff(role) {
   const members = STAFF_MEMBERS.filter(member => member.role.toUpperCase() === role);
   const grid = document.getElementById("staffGrid");
   if (!members.length) {
-    grid.innerHTML = '<div class="staff-empty">لسه مفيش أعضاء مضافين للرتبة دي</div>';
+    grid.innerHTML = '<div class="staff-empty">لسه مفيش أعضاء مضافين للرتبة دي.<br>ضيف بياناتهم في STAFF_MEMBERS داخل script.js</div>';
     return;
   }
   grid.innerHTML = members.map(member => `
@@ -96,52 +94,48 @@ function escapeHTML(value) {
 function escapeAttribute(value) { return escapeHTML(value); }
 document.querySelectorAll(".staff-role").forEach(button => button.addEventListener("click", () => renderStaff(button.dataset.role)));
 
-// Application submit -> Discord webhook. Configure APPLICATION_WEBHOOK_URL above.
-applicationForm.addEventListener("submit", async event => {
-  event.preventDefault();
-  if (!APPLICATION_WEBHOOK_URL.startsWith("https://discord.com/api/webhooks/")) {
-    formStatus.textContent = "الإرسال مش متفعل لسه: حط رابط الـWebhook في script.js الأول.";
+// Application flow: OAuth2 and submission are handled by the secure Python backend.
+const viewApplicationsButton = document.getElementById("viewApplications");
+const authStatus = document.getElementById("authStatus");
+let isDiscordVerified = false;
+
+viewApplicationsButton?.addEventListener("click", () => {
+  if (!API_BASE_URL.startsWith("https://") || API_BASE_URL.includes("YOUR-SAQR-BACKEND-URL")) {
+    authStatus.textContent = "تسجيل الدخول هيتفعل بعد نشر Backend على استضافة Python وإضافة رابطه هنا.";
     return;
   }
-  const formData = new FormData(applicationForm);
-  const answers = Object.fromEntries(formData.entries());
-  const fields = [
-    { name: "Full name / الاسم الثلاثي", value: answers.fullName, inline: false },
-    { name: "Age / السن", value: answers.age, inline: true },
-    { name: "Experience / الخبرة", value: answers.experience, inline: true },
-    { name: "Previous work / أمثلة", value: answers.examples, inline: false },
-    { name: "Knows staff rules / التعليمات", value: answers.rules, inline: true },
-    { name: "Visited website / زار الويب", value: answers.visited, inline: true },
-    { name: "Website rating / تقييم الويب", value: `${answers.rating}/10`, inline: true },
-    { name: "Discord", value: answers.discord, inline: true },
-    { name: "TikTok", value: answers.tiktok, inline: true }
-  ].map(field => ({ ...field, value: String(field.value || "—").slice(0, 1024) }));
+  window.location.href = `${API_BASE_URL}/auth/discord?return_to=${encodeURIComponent(window.location.origin)}`;
+});
+
+// The backend must validate the Discord OAuth callback and membership, then return the user to the site.
+// No webhook or secret is exposed in this public JavaScript file.
+applicationForm.addEventListener("submit", async event => {
+  event.preventDefault();
+  if (!isDiscordVerified) {
+    formStatus.textContent = "سجّل دخولك بديسكورد وتأكد من عضويتك في سيرفر صقر أولًا.";
+    return;
+  }
+  if (!API_BASE_URL.startsWith("https://") || API_BASE_URL.includes("YOUR-SAQR-BACKEND-URL")) {
+    formStatus.textContent = "التقديم مش متفعل لسه؛ لازم نربط الموقع بالـ Backend الأول.";
+    return;
+  }
   const submitButton = applicationForm.querySelector("button[type='submit']");
+  const answers = Object.fromEntries(new FormData(applicationForm).entries());
   submitButton.disabled = true;
   submitButton.textContent = "جاري إرسال التقديم...";
-  formStatus.textContent = "";
   try {
-    const response = await fetch(APPLICATION_WEBHOOK_URL, {
-      method: "POST",
+    const response = await fetch(`${API_BASE_URL}/api/applications`, {
+      method: "POST", credentials: "include",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        username: "SAQR Applications",
-        embeds: [{
-          title: `NEW ${selectedApplication.toUpperCase()} APPLICATION`,
-          color: 16765952,
-          fields,
-          footer: { text: "SAQR • APPLICATIONS — Review manually" },
-          timestamp: new Date().toISOString()
-        }],
-        allowed_mentions: { parse: [] }
-      })
+      body: JSON.stringify({ applicationType: selectedApplication, answers })
     });
-    if (!response.ok) throw new Error(`Webhook response ${response.status}`);
+    const result = await response.json().catch(() => ({}));
+    if (response.status === 409) throw new Error("لقد أرسلت تقديمًا من قبل.");
+    if (!response.ok) throw new Error(result.error || "تعذر إرسال التقديم.");
     applicationForm.reset();
     formStatus.textContent = "تم إرسال التقديم بنجاح! بالتوفيق.";
   } catch (error) {
-    console.error(error);
-    formStatus.textContent = "حصلت مشكلة في الإرسال. راجع رابط الـWebhook وجرب تاني.";
+    formStatus.textContent = error.message || "حصلت مشكلة في الإرسال. حاول مرة أخرى.";
   } finally {
     submitButton.disabled = false;
     submitButton.innerHTML = "إرسال التقديم <span>↗</span>";
