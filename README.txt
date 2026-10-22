@@ -1,13 +1,18 @@
-SAQR Python Backend — setup skeleton
-=====================================
+SAQR Streamer Website
+=======================
 
-This folder contains initial deployment settings only. Do not start accepting real applications until app.py is added/configured and tested.
+Files:
+- index.html
+- style.css
+- script.js
+- background.jpg (included if generated background was available)
 
-1. Upload these files to your Python host.
-2. Install dependencies from requirements.txt.
-3. Set environment variables using .env.example as a guide. Do not upload a real .env to GitHub.
-4. In Discord Developer Portal > OAuth2, set Redirect URI to the exact DISCORD_REDIRECT_URI.
-5. Configure the bot's guild/server ID and assign it appropriate permissions.
-6. Use persistent storage for the database; ephemeral disk may lose submissions on restart.
+Add these files to the same folder (GitHub repo root):
+- logo.png       Your logo
+- photo1.jpg ... photo5.jpg   Gallery images
+- music1.mp3
+- music2.mp3
 
-The frontend expects /auth/discord and /api/applications endpoints. Those must be implemented and tested before publishing live applications.
+Open index.html locally or upload the folder to GitHub Pages / Netlify.
+The first screen offers "دخول الموقع" (starts track 1 after user click) or "دخول بدون موسيقى".
+Replace the two track labels in index.html if you want song titles shown.
